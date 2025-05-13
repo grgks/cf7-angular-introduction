@@ -48,6 +48,7 @@ export class UserRegistrationComponent {
   },
    this.passwordConfirmValidator,
 );
+
  passwordConfirmValidator(control: AbstractControl): {[key:string]: boolean} | null {
     const form = control as FormGroup;
     
@@ -93,28 +94,22 @@ export class UserRegistrationComponent {
   check_dublicate_email(){
     const email = this.form.get("email")?.value;
 
-    if (this.form.controls.email.hasError('required')){
-      this.emailErrorMessage.set('Email is required')
-    } else if (this.form.controls.email.hasError('email')){
-      this.emailErrorMessage.set('Email not valid')
-    }
-
     if (email){
       console.log("email", email);
       this.userService.check_dublicate_email(email)
         .subscribe({
           next: (response) => {
             console.log("Email OK",response);
-            // this.form.get("email")?.setErrors(null)
+            this.form.get("email")?.setErrors(null)
             // this.emailErrorMessage.set('')
-            this.emailErrorMessage.set('Email not exists')
+            //this.emailErrorMessage.set('Email not exists')
           },
           error: (response) => {
             console.log(response);
             const message = response.data;
             console.log("Email not OK",message);
-            // this.form.get('email')?.setErrors({dublicateEmail: true})
-            this.emailErrorMessage.set('Email exists')
+            this.form.get('email')?.setErrors({dublicateEmail: true})
+            //this.emailErrorMessage.set('Email exists')
           }
         })
     }
