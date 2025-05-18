@@ -36,6 +36,7 @@ export class HttpClientExampleComponent implements OnInit {
       .subscribe((data) =>{
         console.log("Dad Joke", data.joke);
         this.dadJoke = data.joke;
+        console.log("dad joke");
       })
   }
 
@@ -44,6 +45,7 @@ export class HttpClientExampleComponent implements OnInit {
       .subscribe((data) => {
         console.log("Chuck Norris Joke", data.value);
         this.chuckNorrisJoke = data.value;
+         console.log("chuck joke");
       })
   }
 }
